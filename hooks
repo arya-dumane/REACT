@@ -1,0 +1,19 @@
+Hooks are special functions provided by React that allow functional components to use React features such as:
+State
+Side effects
+Context
+References to DOM elements
+Performance optimization
+Sharing reusable logic
+
+useState -> state ko manage karne ke liye
+
+useEffect -> side effects handle karne ke liye (jaise API calls, DOM manipulation, event listener).
+
+useContext -> global state ko consume karne ke liye without prop drilling
+
+useReducer -> complex state management ke liye (Redux jaisa chota version)
+
+useRef -> mutable values hold karne ke liye jo re-render trigger na karein, ya DOM access karne ke liye.
+
+useMemo & useCallback -> optimization ke liye, unnneccessary re-render avoid karne ke liye.

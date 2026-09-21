@@ -1,0 +1,25 @@
+<!-- 
+- Real DOM vs Virtual DOM      
+
+The Real DOM is the live, browser-rendered structure of a web page, while the Virtual DOM is a lightweight, in-memory JavaScript copy of that structure used by frameworks like React.
+ The Real DOM updates elements directly in the browser. The Virtual DOM updates a JavaScript copy first, compares the changes using a diffing algorithm, and then applies only the necessary minimum changes to the Real DOM 
+ In real DOM Even minor changes require traversing the entire DOM tree, which affects performance.
+______________________________________________________________________
+
+ - JSX (javascript XML)
+
+ HTML + js
+ allows you to write HTML tags inside the JavaScript code
+_______________________________________________________________
+
+Setting up a React Environment ->
+
+npm create vite
+cd folderName
+npm install   Installs all dependencies listed in package.json and creates node_modules
+npm run dev   Starts the Vite development server
+
+
+
+ -->
+

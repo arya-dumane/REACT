@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.parent {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #111;
+  padding: 20px;
+  color: white;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  align-items: flex-start;
+}
+
+
+/* CARD */
+
+.card {
+  height: 245px;
+  width: 205px;
+
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  flex-shrink: 0;
+}
+
+
+/* TOP SECTION */
+
+.card .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top img {
+  height: 35px;
+  width: 35px;
+
+  border-radius: 50%;
+  border: 2px solid #dadada;
+  padding: 2px;
+
+  object-fit: cover;
+}
+
+.top button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #dadada;
+  padding: 3px 6px;
+
+  font-size: 7px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  color: #999;
+
+  gap: 3px;
+}
+
+
+/* CENTER SECTION */
+
+.center {
+  background-color: transparent;
+}
+
+.center h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111;
+}
+
+.center h3 span {
+  font-size: 7px;
+  font-weight: 400;
+  color: #8b8b8b;
+
+  margin-left: 3px;
+}
+
+.center h2 {
+  font-size: 14px;
+  font-weight: 600;
+
+  margin-top: 2px;
+  color: #111;
+}
+
+.center .tag {
+  display: flex;
+
+  margin-top: 7px;
+  gap: 5px;
+}
+
+.center .tag h4 {
+  font-size: 7px;
+
+  background-color: #e5e5e5;
+  color: #111;
+
+  font-weight: 500;
+
+  padding: 4px 6px;
+  border-radius: 2px;
+}
+
+
+/* BOTTOM SECTION */
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-top: 1px solid #d5d5d5;
+  padding-top: 12px;
+}
+
+.bottom h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111;
+}
+
+.bottom h4 {
+  font-size: 7px;
+  font-weight: 400;
+
+  color: #8b8b8b;
+
+  margin-top: 1px;
+}
+
+.bottom button {
+  border: none;
+
+  background-color: #111;
+  color: white;
+
+  padding: 7px 10px;
+
+  border-radius: 5px;
+  font-size: 8px;
+
+  cursor: pointer;
+}
