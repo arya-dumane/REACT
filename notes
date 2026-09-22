@@ -1,0 +1,325 @@
+<!-- What exactly is React?
+React is a JavaScript library for building user interfaces, especially interfaces made from reusable components.
+
+Manually managing all those DOM changes becomes difficult.
+React provides a structured way to describe:
+"This is what my UI should look like for the current state."
+Instead of manually telling the browser every DOM operation.
+
+JSX(JavaScript XML) allows us to write UI-like syntax inside JavaScript.
+
+What is Vite?
+Vite is a build tool and development server used to create and run modern frontend applications.
+Vite gives you the development environment needed to:
+run your React application
+transform JSX
+bundle your application for production
+provide fast development updates
+optimize your application for production.
+
+node_modules
+This contains installed dependencies.Also, it usually isn't committed to GitHub.
+That's why .gitignore contains:node_modules
+
+You can put JavaScript expressions inside {}.
+{expression} works. But arbitrary JavaScript statements don't directly work there.
+{if (age > 18) {
+    ...
+}}    -----not valid
+instead, {age > 18 ? "Adult" : "Minor"}
+
+Props = properties passed from a parent component to a child component.
+Props are just an object. Props are read-only : A component should not modify its own props.
+
+JavaScript object destructuring -
+Instead of:
+
+function Product(props) {
+    return (
+        <div>
+            <h2>{props.name}</h2>
+            <p>{props.price}</p>
+        </div>
+    );
+}
+
+we commonly write:
+
+function Product({ name, price }) {
+    return (
+        <div>
+            <h2>{name}</h2>
+            <p>{price}</p>
+        </div>
+    );
+}
+
+Component Composition:
+<Card>
+    <h2>Hello</h2>
+    <p>Welcome</p>
+</Card>
+
+function Card({ children }) {
+    return (
+        <div className="card">
+            {children}
+        </div>
+    );
+}
+
+props vs children
+The content between the opening and closing component tags becomes: children
+Props
+    ↓
+Data passed Parent → Child
+
+children
+    ↓
+Content passed through component tags
+
+composition vs props:
+<Card title="Product">
+    <p>iPhone</p>
+    <button>Buy</button>
+</Card>
+
+function Card({ title, children }) {
+    return (
+        <div className="card">
+            <h2>{title}</h2>
+            <div>
+                {children}
+            </div>
+        </div>
+    );
+}
+
+Dynamic rendering means:
+The UI is generated based on data instead of manually writing every UI element.
+function App() {
+    return (
+        <div>
+            {products.map((product) => (
+                <Product
+                    name={product.name}
+                    price={product.price}
+                />
+            ))}
+        </div>
+    );
+}
+
+React will give you a warning:
+Each child in a list should have a unique "key" prop.
+{products.map((product) => (
+    <Product
+        key={product.id}
+        name={product.name}
+        price={product.price}
+    />
+))}
+avoid key={index}
+
+Writing every prop manually becomes annoying.
+You can use the spread operator:
+<Product
+    key={product.id}
+    {...product}
+/>
+
+Conditional Rendering:
+function App() {
+    const isLoggedIn = true;
+
+    return (
+        <h1>
+            {isLoggedIn ? "Welcome" : "Please Login"}
+        </h1>
+    );
+}
+
+function App() {
+    const hasNotification = true;
+
+    return (
+        <div>
+            <h1>Home</h1>
+
+            {hasNotification && (
+                <p>You have a new notification!</p>
+            )}
+        </div>
+    );
+}
+
+You can't simply do:
+<button onClick={greet("Arya")}>
+because that executes immediately.
+Instead:
+<button onClick={() => greet("Arya")}>
+    Greet
+</button>
+
+React gives your event handler an event object.
+function handleClick(event) {
+    console.log(event);
+}
+<button onClick={handleClick}>
+    Click
+</button>
+
+State is data that React remembers for a component and that can trigger a re-render when updated.
+Each component instance gets its own state.
+
+setCount(prevCount => prevCount + 1);
+This is called the functional updater form.
+
+function handleClick() {
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+}
+All three calls can be based on the same current count value from that render.
+Using:
+setCount(prev => prev + 1);
+setCount(prev => prev + 1);
+setCount(prev => prev + 1);
+
+const [items, setItems] = useState([]);
+You should not do: items.push(newItem);
+because you're mutating the existing array.
+Instead:
+setItems(prevItems => [
+    ...prevItems,
+    newItem
+]);
+We're creating a new array.
+
+State Colocation -> Keep state as close as possible to the components that actually need it.Keep state at the lowest common ancestor of all components that need that state.
+
+React applications commonly treat state as immutable.
+
+That means:
+Don't directly modify the existing state object/array. Create a new value instead.
+
+Why?
+Because React relies heavily on identity/reference changes to reason about whether values have changed.
+
+Remove an item
+const [items, setItems] = useState([
+    { id: 1, name: "Apple" },
+    { id: 2, name: "Banana" },
+    { id: 3, name: "Mango" }
+]);
+
+Remove Banana:
+setItems(prev =>
+    prev.filter(item => item.id !== 2)
+);
+
+
+
+import { useState } from "react";
+
+function App() {
+
+    const [name, setName] = useState("");
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        console.log(name);
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+
+            <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+
+            <button type="submit">
+                Submit
+            </button>
+
+        </form>
+    );
+}
+
+
+
+
+import { useState } from "react";
+
+function App() {
+
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        password: ""
+    });
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+
+        setForm(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        console.log(form);
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+
+            <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+            />
+
+            <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+            />
+
+            <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+            />
+
+            <button type="submit">
+                Register
+            </button>
+
+        </form>
+    );
+}
+
+
+With no dependency array:
+useEffect(() => {
+    console.log("Effect");
+});
+it runs after every render.
+
+useEffect(() => {
+    console.log("Effect");
+}, []);
+Now the effect runs after the component's initial mount.
+
+[] is dependency array
+ -->
